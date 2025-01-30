@@ -6,6 +6,8 @@ Este proyecto Laravel está configurado para ejecutarse usando Docker, con servi
 
 - Docker
 - Docker Compose
+- Nodejs
+- NPM
 
 ## Instalación
 
@@ -14,16 +16,20 @@ Este proyecto Laravel está configurado para ejecutarse usando Docker, con servi
    Clona el repositorio en tu máquina local:
 
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd <nombre_del_repositorio>
+   git clone https://github.com/NKaldee/task_manager
+   cd task_manager
 
 
-2. **Construir y ejecutar los contenedores**
+2. **Construir y ejecutar los contenedores y migraciones**
 
    Usa Docker Compose para construir y levantar los contenedores:
 
    ```bash
-   docker-compose up --build
+   npm install
+   npm run build
+   docker-compose up --build -d
+   docker-compose exec app composer install
+   docker-compose exec app php artisan migrate
 
    Este comando:
    * Construirá las imágenes de los contenedores.
@@ -35,10 +41,3 @@ Este proyecto Laravel está configurado para ejecutarse usando Docker, con servi
 
    ```bash
    http://localhost
-
-4. **Ejecutar migraciones**
-
-   Dentro del contenedor de la aplicación, ejecuta las migraciones para preparar la base de datos:
-   
-   ```bash
-   docker-compose exec app php artisan migrate
